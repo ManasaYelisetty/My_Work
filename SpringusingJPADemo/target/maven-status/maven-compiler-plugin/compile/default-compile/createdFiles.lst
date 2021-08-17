@@ -1,0 +1,4 @@
+com\dao\UserDaoImpl.class
+com\dao\UserDao.class
+com\model\User.class
+com\main\JPAExample.class
