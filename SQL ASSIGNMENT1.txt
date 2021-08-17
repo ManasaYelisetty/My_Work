@@ -1,0 +1,879 @@
+Create Table:
+-------------
+
+1.Write a SQL statement to create a simple table countries including columns country_id,country_name and region_id
+CREATE TABLE countries(
+    -> COUNTRY_ID varchar(2),
+    -> COUNTRY_NAME varchar(40),
+    -> REGION_ID decimal(10,0)
+    -> );
+
+mysql> desc countries;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| COUNTRY_ID   | varchar(2)    | YES  |     | NULL    |       |
+| COUNTRY_NAME | varchar(40)   | YES  |     | NULL    |       |
+| REGION_ID    | decimal(10,0) | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+3 rows in set (0.05 sec)
+
+2.Write a SQL statement to create a table countries set a constraint NULL
+
+mysql> CREATE TABLE IF NOT EXISTS countries (
+    -> COUNTRY_ID varchar(2) NOT NULL,
+    -> COUNTRY_NAME varchar(40) NOT NULL,
+    -> REGION_ID decimal(10,0) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> desc countries;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| COUNTRY_ID   | varchar(2)    | NO   |     | NULL    |       |
+| COUNTRY_NAME | varchar(40)   | NO   |     | NULL    |       |
+| REGION_ID    | decimal(10,0) | NO   |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+3 rows in set (0.04 sec)
+
+3.create table locations including columns.
+LOCATION_ID         	decimal(4,0) 
+STREET_ADDRESS  	varchar(40)
+POSTAL_CODE       	varchar(12)
+CITY   	varchar(30) 
+STATE_PROVINCE 	varchar(25) 
+COUNTRY_ID         	varchar(2) 
+
+create table locations (location_id decimal(4,0),
+    -> street_address varchar(40),
+    -> postal_code varchar(12),
+    -> city varchar(30),
+    -> state_province varchar(25),
+    -> country_id varchar(2));
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> desc locations;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| location_id    | decimal(4,0) | YES  |     | NULL    |       |
+| street_address | varchar(40)  | YES  |     | NULL    |       |
+| postal_code    | varchar(12)  | YES  |     | NULL    |       |
+| city           | varchar(30)  | YES  |     | NULL    |       |
+| state_province | varchar(25)  | YES  |     | NULL    |       |
+| country_id     | varchar(2)   | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+6 rows in set (0.12 sec)
+
+4.ALTER TABLE:
+--------------
+1.Write a SQL statement to rename the table countries to country_new.
+
+alter table countries rename to country_new;
+Query OK, 0 rows affected (0.52 sec)
+
+mysql> desc country_new;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| COUNTRY_ID   | varchar(2)    | YES  |     | NULL    |       |
+| COUNTRY_NAME | varchar(40)   | YES  |     | NULL    |       |
+| REGION_ID    | decimal(10,0) | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+3 rows in set (0.11 sec)
+
+2.Write a SQL statement to add a columns ID as the first column of the table locations
+
+desc locations;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| location_id    | decimal(4,0) | YES  |     | NULL    |       |
+| street_address | varchar(40)  | YES  |     | NULL    |       |
+| postal_code    | varchar(12)  | YES  |     | NULL    |       |
+| city           | varchar(30)  | YES  |     | NULL    |       |
+| state_province | varchar(25)  | YES  |     | NULL    |       |
+| country_id     | varchar(2)   | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table locations add ID int(4) first;
+Query OK, 0 rows affected, 1 warning (1.84 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc locations;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| ID             | int          | YES  |     | NULL    |       |
+| location_id    | decimal(4,0) | YES  |     | NULL    |       |
+| street_address | varchar(40)  | YES  |     | NULL    |       |
+| postal_code    | varchar(12)  | YES  |     | NULL    |       |
+| city           | varchar(30)  | YES  |     | NULL    |       |
+| state_province | varchar(25)  | YES  |     | NULL    |       |
+| country_id     | varchar(2)   | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+7 rows in set (0.07 sec)
+
+3.Write a SQL statement to add a column region_id after state_province to the table locations
+
+alter table locations add region_id int after state_province;
+Query OK, 0 rows affected (0.78 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc locations;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| ID             | int          | YES  |     | NULL    |       |
+| location_id    | decimal(4,0) | YES  |     | NULL    |       |
+| street_address | varchar(40)  | YES  |     | NULL    |       |
+| postal_code    | varchar(12)  | YES  |     | NULL    |       |
+| city           | varchar(30)  | YES  |     | NULL    |       |
+| state_province | varchar(25)  | YES  |     | NULL    |       |
+| region_id      | int          | YES  |     | NULL    |       |
+| country_id     | varchar(2)   | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+8 rows in set (0.10 sec)
+
+4.Write a SQL statement change the data type of the column country_id to integer in the table locations.
+
+alter table locations modify country_id  int;
+Query OK, 0 rows affected (2.44 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc locations;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| ID             | int          | YES  |     | NULL    |       |
+| location_id    | decimal(4,0) | YES  |     | NULL    |       |
+| street_address | varchar(40)  | YES  |     | NULL    |       |
+| postal_code    | varchar(12)  | YES  |     | NULL    |       |
+| city           | varchar(30)  | YES  |     | NULL    |       |
+| state_province | varchar(25)  | YES  |     | NULL    |       |
+| region_id      | int          | YES  |     | NULL    |       |
+| country_id     | int          | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+8 rows in set (0.07 sec)
+
+Insert Table:
+-------------
+1.Write a SQL statement to insert 3 rows by a single insert statement.
+
+insert into country_new (country_id,country_name,region_id) values('C1','India',1),('C2','Japan',2),('C3','China',3);
+Query OK, 3 rows affected (0.16 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from country_new;
++------------+--------------+-----------+
+| COUNTRY_ID | COUNTRY_NAME | REGION_ID |
++------------+--------------+-----------+
+| C1         | India        |         1 |
+| C2         | Japan        |         2 |
+| C3         | China        |         3 |
++------------+--------------+-----------+
+3 rows in set (0.00 sec)
+
+2.Write a SQL statement to insert rows into the table countries in which the value of country_id column will be unique and auto incremented
+
+create table countries(country_id int auto_increment unique ,country_name varchar(40), region_id int(4));
+Query OK, 0 rows affected, 1 warning (0.81 sec)
+
+mysql> desc countries;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| country_id   | int         | NO   | PRI | NULL    | auto_increment |
+| country_name | varchar(40) | YES  |     | NULL    |                |
+| region_id    | int         | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.08 sec)
+
+mysql> insert into countries(country_name,region_id) values('Italy',101),('Iran',102);
+Query OK, 2 rows affected (0.15 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from countries;
++------------+--------------+-----------+
+| country_id | country_name | region_id |
++------------+--------------+-----------+
+|          1 | Italy        |       101 |
+|          2 | Iran         |       102 |
++------------+--------------+-----------+
+2 rows in set (0.05 sec)
+
+3.Write a SQL statement to insert rows only for country_id and country_name.
+
+insert into countries(country_id, country_name) values(11,'India'),(22,'Iran');
+Query OK, 2 rows affected (0.18 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from countries;
++------------+--------------+-----------+
+| country_id | country_name | region_id |
++------------+--------------+-----------+
+|          1 | Italy        |       101 |
+|          2 | Iran         |       102 |
+|         11 | India        |      NULL |
+|         22 | Iran         |      NULL |
++------------+--------------+-----------+
+4 rows in set (0.00 sec)
+
+Update Table:
+--------------
+Employees Table:
+----------------
+1.Write a SQL statement to change the email and commission_pct column of employees table
+     with 'not available' and 0.10 for all employees
+
+mysql> create table Employees_Table(EMPLOYEE_ID char(11),EMPLOYEE_NAME char(20), EMAIL char(20), SALARY decimal(11), COMMISSION_PCT char(10),DEPARTMENT_ID char(11));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> Insert into Employees_Table values('100','Steven','SKING',24000.00,'0.00','90');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> Insert into Employees_Table values('101','Neena','NKOCHHAR',1700.00,'0.00','90');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> Insert into Employees_Table values('102','Lex','LDEHAAN',17000.00,'0.00','90');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> Insert into Employees_Table values('103','Alexander','AHUNOLD',9000.00,'0.00','60');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> Insert into Employees_Table values('104','Bruce','BERNST',6000.00,'0.00','60');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> Insert into Employees_Table values('105','David','DAUSTIN',4800.00,'0.00','60');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> Insert into Employees_Table values('106','Valli','VPATABAL',4200.00,'0.00','60');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> Insert into Employees_Table values('107','Diana','DLORENTZ',12008.00,'0.00','110');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> Insert into Employees_Table values('205','Shelley','SHIGGINS',8300.00,'0.00','110');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> Insert into Employees_Table values('206','William','WGIETZ',8300.00,'0.00','110');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from Employees_Table;
++-------------+---------------+----------+--------+----------------+---------------+
+| EMPLOYEE_ID | EMPLOYEE_NAME | EMAIL    | SALARY | COMMISSION_PCT | DEPARTMENT_ID |
++-------------+---------------+----------+--------+----------------+---------------+
+| 100         | Steven        | SKING    |  24000 | 0.00           | 90            |
+| 101         | Neena         | NKOCHHAR |   1700 | 0.00           | 90            |
+| 102         | Lex           | LDEHAAN  |  17000 | 0.00           | 90            |
+| 103         | Alexander     | AHUNOLD  |   9000 | 0.00           | 60            |
+| 104         | Bruce         | BERNST   |   6000 | 0.00           | 60            |
+| 105         | David         | DAUSTIN  |   4800 | 0.00           | 60            |
+| 106         | Valli         | VPATABAL |   4200 | 0.00           | 60            |
+| 107         | Diana         | DLORENTZ |  12008 | 0.00           | 110           |
+| 205         | Shelley       | SHIGGINS |   8300 | 0.00           | 110           |
+| 206         | William       | WGIETZ   |   8300 | 0.00           | 110           |
++-------------+---------------+----------+--------+----------------+---------------+
+10 rows in set (0.03 sec)
+
+mysql> UPDATE Employees_Table SET EMAIL ='not available',
+    -> COMMISSION_PCT=0.10;
+Query OK, 10 rows affected (0.04 sec)
+Rows matched: 10  Changed: 10  Warnings: 0
+
+mysql> select * from Employees_Table;
++-------------+---------------+---------------+--------+----------------+---------------+
+| EMPLOYEE_ID | EMPLOYEE_NAME | EMAIL         | SALARY | COMMISSION_PCT | DEPARTMENT_ID |
++-------------+---------------+---------------+--------+----------------+---------------+
+| 100         | Steven        | not available |  24000 | 0.10           | 90            |
+| 101         | Neena         | not available |   1700 | 0.10           | 90            |
+| 102         | Lex           | not available |  17000 | 0.10           | 90            |
+| 103         | Alexander     | not available |   9000 | 0.10           | 60            |
+| 104         | Bruce         | not available |   6000 | 0.10           | 60            |
+| 105         | David         | not available |   4800 | 0.10           | 60            |
+| 106         | Valli         | not available |   4200 | 0.10           | 60            |
+| 107         | Diana         | not available |  12008 | 0.10           | 110           |
+| 205         | Shelley       | not available |   8300 | 0.10           | 110           |
+| 206         | William       | not available |   8300 | 0.10           | 110           |
++-------------+---------------+---------------+--------+----------------+---------------+
+10 rows in set (0.00 sec)
+----------------------------------------------------------------------------------------------------------
+
+2.Write a SQL statement to change the email and commission_pct column of employees table 
+  with 'not available' and 0.10 for those employees whose department_id is 110.
+
+mysql> select * from Employees_Table;
++-------------+---------------+----------+--------+----------------+---------------+
+| EMPLOYEE_ID | EMPLOYEE_NAME | EMAIL    | SALARY | COMMISSION_PCT | DEPARTMENT_ID |
++-------------+---------------+----------+--------+----------------+---------------+
+| 100         | Steven        | SKING    |  24000 | 0.00           | 90            |
+| 101         | Neena         | NKOCHHAR |   1700 | 0.00           | 90            |
+| 102         | Lex           | LDEHAAN  |  17000 | 0.00           | 90            |
+| 103         | Alexander     | AHUNOLD  |   9000 | 0.00           | 60            |
+| 104         | Bruce         | BERNST   |   6000 | 0.00           | 60            |
+| 105         | David         | DAUSTIN  |   4800 | 0.00           | 60            |
+| 106         | Valli         | VPATABAL |   4200 | 0.00           | 60            |
+| 107         | Diana         | DLORENTZ |  12008 | 0.00           | 110           |
+| 205         | Shelley       | SHIGGINS |   8300 | 0.00           | 110           |
+| 206         | William       | WGIETZ   |   8300 | 0.00           | 110           |
++-------------+---------------+----------+--------+----------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql>  UPDATE Employees_Table
+    ->  SET EMAIL='not available',
+    ->  COMMISSION_PCT=0.10
+    -> WHERE DEPARTMENT_ID=110;
+Query OK, 3 rows affected (0.04 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from Employees_Table;
++-------------+---------------+---------------+--------+----------------+---------------+
+| EMPLOYEE_ID | EMPLOYEE_NAME | EMAIL         | SALARY | COMMISSION_PCT | DEPARTMENT_ID |
++-------------+---------------+---------------+--------+----------------+---------------+
+| 100         | Steven        | SKING         |  24000 | 0.00           | 90            |
+| 101         | Neena         | NKOCHHAR      |   1700 | 0.00           | 90            |
+| 102         | Lex           | LDEHAAN       |  17000 | 0.00           | 90            |
+| 103         | Alexander     | AHUNOLD       |   9000 | 0.00           | 60            |
+| 104         | Bruce         | BERNST        |   6000 | 0.00           | 60            |
+| 105         | David         | DAUSTIN       |   4800 | 0.00           | 60            |
+| 106         | Valli         | VPATABAL      |   4200 | 0.00           | 60            |
+| 107         | Diana         | not available |  12008 | 0.10           | 110           |
+| 205         | Shelley       | not available |   8300 | 0.10           | 110           |
+| 206         | William       | not available |   8300 | 0.10           | 110           |
++-------------+---------------+---------------+--------+----------------+---------------+
+10 rows in set (0.00 sec)
+
+3.Write a SQL statement to change salary of employee to 8000 whose ID is 105,
+    if the existing salary is less than 5000
+
+mysql> select * from Employees_Table;
++-------------+---------------+----------+--------+----------------+---------------+
+| EMPLOYEE_ID | EMPLOYEE_NAME | EMAIL    | SALARY | COMMISSION_PCT | DEPARTMENT_ID |
++-------------+---------------+----------+--------+----------------+---------------+
+| 100         | Steven        | SKING    |  24000 | 0.00           | 90            |
+| 101         | Neena         | NKOCHHAR |   1700 | 0.00           | 90            |
+| 102         | Lex           | LDEHAAN  |  17000 | 0.00           | 90            |
+| 103         | Alexander     | AHUNOLD  |   9000 | 0.00           | 60            |
+| 104         | Bruce         | BERNST   |   6000 | 0.00           | 60            |
+| 105         | David         | DAUSTIN  |   4800 | 0.00           | 60            |
+| 106         | Valli         | VPATABAL |   4200 | 0.00           | 60            |
+| 107         | Diana         | DLORENTZ |  12008 | 0.00           | 110           |
+| 205         | Shelley       | SHIGGINS |   8300 | 0.00           | 110           |
+| 206         | William       | WGIETZ   |   8300 | 0.00           | 110           |
++-------------+---------------+----------+--------+----------------+---------------+
+
+mysql> UPDATE Employees_Table SET SALARY = 8000 WHERE EMPLOYEE_ID = 105 AND SALARY < 5000;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Employees_Table;
++-------------+---------------+---------------+--------+----------------+---------------+
+| EMPLOYEE_ID | EMPLOYEE_NAME | EMAIL         | SALARY | COMMISSION_PCT | DEPARTMENT_ID |
++-------------+---------------+---------------+--------+----------------+---------------+
+| 100         | Steven        | SKING         |  24000 | 0.00           | 90            |
+| 101         | Neena         | NKOCHHAR      |   1700 | 0.00           | 90            |
+| 102         | Lex           | LDEHAAN       |  17000 | 0.00           | 90            |
+| 103         | Alexander     | AHUNOLD       |   9000 | 0.00           | 60            |
+| 104         | Bruce         | BERNST        |   6000 | 0.00           | 60            |
+| 105         | David         | DAUSTIN       |   8000 | 0.00           | 60            |
+| 106         | Valli         | VPATABAL      |   4200 | 0.00           | 60            |
+| 107         | Diana         | not available |  12008 | 0.10           | 110           |
+| 205         | Shelley       | not available |   8300 | 0.10           | 110           |
+| 206         | William       | not available |   8300 | 0.10           | 110           |
++-------------+---------------+---------------+--------+----------------+---------------+
+10 rows in set (0.03 sec)
+
+SELECT:
+--------
+SALESMAN_TABLE:
+---------------
+CREATE TABLE SALESMAN_TABLE(SALESMAN_ID INT(6), NAME VARCHAR(20), CITY VARCHAR(20), COMMISSION DECIMAL(2,2));
+Query OK, 0 rows affected, 1 warning (0.43 sec)
+
+mysql> INSERT INTO SALESMAN_TABLE(SALESMAN_ID,NAME,CITY,COMMISSION) VALUES(5001,'JAMES HOOG','NEW YORK',0.15),(5002,'NAIL KNITE','PARIS',0.13),(5005,'PIT ALEX','LONDN',0.11),(5006,'MC LYON','PARIS',0.14),(5003,'LAUSON HEN',' ',0.12),(5007,'PAUL ADAM','ROME',0.13);
+Query OK, 6 rows affected (0.17 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM SALESMAN_TABLE;
++-------------+------------+----------+------------+
+| SALESMAN_ID | NAME       | CITY     | COMMISSION |
++-------------+------------+----------+------------+
+|        5001 | JAMES HOOG | NEW YORK |       0.15 |
+|        5002 | NAIL KNITE | PARIS    |       0.13 |
+|        5005 | PIT ALEX   | LONDN    |       0.11 |
+|        5006 | MC LYON    | PARIS    |       0.14 |
+|        5003 | LAUSON HEN |          |       0.12 |
+|        5007 | PAUL ADAM  | ROME     |       0.13 |
++-------------+------------+----------+------------+
+6 rows in set (0.00 sec)
+
+ORDERS_TABLE:
+--------------
+create table orders_table(ord_no decimal(7,0),purch_amt decimal(6,2), ord_date date, customer_id int(6), salesman_id int(6));
+Query OK, 0 rows affected, 2 warnings (0.42 sec)
+
+mysql> desc orders_table;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| ord_no      | decimal(7,0) | YES  |     | NULL    |       |
+| purch_amt   | decimal(6,2) | YES  |     | NULL    |       |
+| ord_date    | date         | YES  |     | NULL    |       |
+| customer_id | int          | YES  |     | NULL    |       |
+| salesman_id | int          | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.08 sec)
+
+mysql> insert into orders_table(ord_no,purch_amt,ord_date,customer_id,salesman_id) values(70001,150.5,'2012-10-05',3005,5002),(70009,270.65,'2012-09-10',3001,5005);
+Query OK, 2 rows affected (0.10 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into orders_table(ord_no,purch_amt,ord_date,customer_id,salesman_id) values(70002,65.26,'2012-10-05',3002,5001),(70004,110.5,'2012-08-17',3009,5003);
+Query OK, 2 rows affected (0.17 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into orders_table(ord_no,purch_amt,ord_date,customer_id,salesman_id) values(70007,948.5,'2012-09-10',3005,5002),(70005,2400.6,'2012-07-27',3007,5001);
+Query OK, 2 rows affected (0.12 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into orders_table(ord_no,purch_amt,ord_date,customer_id,salesman_id) values(70008,5760,'2012-09-10',3002,5001);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into orders_table(ord_no,purch_amt,ord_date,customer_id,salesman_id) values(70010,1983.43,'2012-10-10',3004,5006);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into orders_table(ord_no,purch_amt,ord_date,customer_id,salesman_id) values(70003,2480.4,'2012-10-10',3009,5003),(70012,250.45,'2012-06-27',3008,5002);
+Query OK, 2 rows affected (0.10 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into orders_table(ord_no,purch_amt,ord_date,customer_id,salesman_id) values(70011,75.29,'2012-08-17',3003,5007),(70013,3045.6,'2012-04-25',3002,5001);
+Query OK, 2 rows affected (0.17 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from orders_table;
++--------+-----------+------------+-------------+-------------+
+| ord_no | purch_amt | ord_date   | customer_id | salesman_id |
++--------+-----------+------------+-------------+-------------+
+|  70001 |    150.50 | 2012-10-05 |        3005 |        5002 |
+|  70009 |    270.65 | 2012-09-10 |        3001 |        5005 |
+|  70002 |     65.26 | 2012-10-05 |        3002 |        5001 |
+|  70004 |    110.50 | 2012-08-17 |        3009 |        5003 |
+|  70007 |    948.50 | 2012-09-10 |        3005 |        5002 |
+|  70005 |   2400.60 | 2012-07-27 |        3007 |        5001 |
+|  70008 |   5760.00 | 2012-09-10 |        3002 |        5001 |
+|  70010 |   1983.43 | 2012-10-10 |        3004 |        5006 |
+|  70003 |   2480.40 | 2012-10-10 |        3009 |        5003 |
+|  70012 |    250.45 | 2012-06-27 |        3008 |        5002 |
+|  70011 |     75.29 | 2012-08-17 |        3003 |        5007 |
+|  70013 |   3045.60 | 2012-04-25 |        3002 |        5001 |
++--------+-----------+------------+-------------+-------------+
+12 rows in set (0.00 sec)
+
+CUSTOMERS_TABLE:
+----------------
+CREATE TABLE CUSTOMERS_TABLE(CUSTOMER_ID INT(4), CUST_NAME VARCHAR(15), CITY VARCHAR(15), GRADE INT(5), SALESMAN_ID INT(5));
+
+ INSERT INTO CUSTOMERS_TABLE(CUSTOMER_ID,CUST_NAME,CITY,GRADE,SALESMAN_ID) VALUES(3002,'NICK RIMANDO','NEW YORK',100,5001);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> INSERT INTO CUSTOMERS_TABLE(CUSTOMER_ID,CUST_NAME,CITY,GRADE,SALESMAN_ID) VALUES(3005,'GRAHAM ZUSI','CALIFORNIA',200,5002),(3001,'BRAD GUZAN','LONDON',0,5005),(3004,'FABIAN JOHNS','PARIS',300,5006),(3007,'BRAD DAVIS','NEW YORK',200,5001),(3009,'GEOFF CAMERO','BERLIN',100,5003),(3008,'JULIAN GREEN','LONDON',300,5002),(3003,'JOZY ALTIDOR','MOSCOW',200,5007);
+Query OK, 7 rows affected (0.15 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+> SELECT * FROM CUSTOMERS_TABLE;
++-------------+--------------+------------+-------+-------------+
+| CUSTOMER_ID | CUST_NAME    | CITY       | GRADE | SALESMAN_ID |
++-------------+--------------+------------+-------+-------------+
+|        3002 | NICK RIMANDO | NEW YORK   |   100 |        5001 |
+|        3005 | GRAHAM ZUSI  | CALIFORNIA |   200 |        5002 |
+|        3001 | BRAD GUZAN   | LONDON     |     0 |        5005 |
+|        3004 | FABIAN JOHNS | PARIS      |   300 |        5006 |
+|        3007 | BRAD DAVIS   | NEW YORK   |   200 |        5001 |
+|        3009 | GEOFF CAMERO | BERLIN     |   100 |        5003 |
+|        3008 | JULIAN GREEN | LONDON     |   300 |        5002 |
+|        3003 | JOZY ALTIDOR | MOSCOW     |   200 |        5007 |
++-------------+--------------+------------+-------+-------------+
+8 rows in set (0.00 sec)
+
+PRODUCTS_TABLE:
+---------------
+ CREATE TABLE PRODUCTS_TABLE(PRO_ID INT(4), PRO_NAME VARCHAR(20), PRO_PRICE INT(5), PRO_COM INT(4));
+Query OK, 0 rows affected, 3 warnings (0.93 sec)
+
+mysql> INSERT INTO PRODUCTS_TABLE(PRO_ID,PRO_NAME,PRO_PRICE,PRO_COM) VALUES(101,'MOTHER BOARD',3200,15),(102,'KEY BOARD',450,16),(103,'ZIP DRIVE',250,14),(104,'SPEAKER',550,16),(105,'MONITOR',5000,11),(106,'DVD DRIVE',900,12),(107,'CD DRIVE',800,12),(108,'PRINTER',2600,13),(109,'REFILL CARTRIDGE',350,13),(110,'MOUSE',250,12);
+Query OK, 10 rows affected (0.19 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM PRODUCTS_TABLE;
++--------+------------------+-----------+---------+
+| PRO_ID | PRO_NAME         | PRO_PRICE | PRO_COM |
++--------+------------------+-----------+---------+
+|    101 | MOTHER BOARD     |      3200 |      15 |
+|    102 | KEY BOARD        |       450 |      16 |
+|    103 | ZIP DRIVE        |       250 |      14 |
+|    104 | SPEAKER          |       550 |      16 |
+|    105 | MONITOR          |      5000 |      11 |
+|    106 | DVD DRIVE        |       900 |      12 |
+|    107 | CD DRIVE         |       800 |      12 |
+|    108 | PRINTER          |      2600 |      13 |
+|    109 | REFILL CARTRIDGE |       350 |      13 |
+|    110 | MOUSE            |       250 |      12 |
++--------+------------------+-----------+---------+
+10 rows in set (0.00 sec)
+
+DEPARTMENTS_TABLE:
+------------------
+
+ CREATE tABLE DEPARTMENTS_TABLE(DEPARTMENT_ID INT(4), DEPARTMENT_NAME VARCHAR(20),MANAGER_ID INT(4),LOCATION_ID INT(6));
+
+ INSERT INTO DEPARTMENTS_TABLE(DEPARTMENT_ID,DEPARTMENT_NAME,MANAGER_ID,LOCATION_ID) VALUES(10,'ADMINISTRATION',200,1700),(20,'MARKETING',201,1800),(30,'PURCHASING',114,1700),(40,'HUMAN RESORCES',204,2400),(50,'SHIPPING',11,1500),(60,'IT',103,14000),(70,'PUBLIC RELATIONS',204,2700),(80,'SALES',145,2500),(90,'EXECUTIVE',100,1700),(100,'FINANCE',108,1700),(110,'ACCOUNTING',205,1700);
+Query OK, 11 rows affected (0.18 sec)
+Records: 11  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM DEPARTMENTS_TABLE;
++---------------+------------------+------------+-------------+
+| DEPARTMENT_ID | DEPARTMENT_NAME  | MANAGER_ID | LOCATION_ID |
++---------------+------------------+------------+-------------+
+|            10 | ADMINISTRATION   |        200 |        1700 |
+|            20 | MARKETING        |        201 |        1800 |
+|            30 | PURCHASING       |        114 |        1700 |
+|            40 | HUMAN RESORCES   |        204 |        2400 |
+|            50 | SHIPPING         |         11 |        1500 |
+|            60 | IT               |        103 |       14000 |
+|            70 | PUBLIC RELATIONS |        204 |        2700 |
+|            80 | SALES            |        145 |        2500 |
+|            90 | EXECUTIVE        |        100 |        1700 |
+|           100 | FINANCE          |        108 |        1700 |
+|           110 | ACCOUNTING       |        205 |        1700 |
++---------------+------------------+------------+-------------+
+11 rows in set (0.00 sec)
+
+1.Write a SQL statement to display all the information of all salesmen
+
+select* from salesman_table;
++-------------+------------+----------+------------+
+| SALESMAN_ID | NAME       | CITY     | COMMISSION |
++-------------+------------+----------+------------+
+|        5001 | JAMES HOOG | NEW YORK |       0.15 |
+|        5002 | NAIL KNITE | PARIS    |       0.13 |
+|        5005 | PIT ALEX   | LONDN    |       0.11 |
+|        5006 | MC LYON    | PARIS    |       0.14 |
+|        5003 | LAUSON HEN |          |       0.12 |
+|        5007 | PAUL ADAM  | ROME     |       0.13 |
++-------------+------------+----------+------------+
+6 rows in set (0.06 sec)
+
+2.Write a SQL statement to display specific columns like name and commission for all the salesmen
+
+select name,commission from salesman_table;
++------------+------------+
+| name       | commission |
++------------+------------+
+| JAMES HOOG |       0.15 |
+| NAIL KNITE |       0.13 |
+| PIT ALEX   |       0.11 |
+| MC LYON    |       0.14 |
+| LAUSON HEN |       0.12 |
+| PAUL ADAM  |       0.13 |
++------------+------------+
+6 rows in set (0.00 sec)
+
+3.Write a SQL statement to display names and city of salesman, who belongs to the city of Paris
+
+ select name,city from salesman_table where city='paris';
++------------+-------+
+| name       | city  |
++------------+-------+
+| NAIL KNITE | PARIS |
+| MC LYON    | PARIS |
++------------+-------+
+2 rows in set (0.00 sec)
+
+4.Write a query to display the columns in a specific order like order date, salesman id, order number and purchase amount from for all the orders
+
+select ord_date,salesman_id,ord_no,purch_amt from orders_table;
++------------+-------------+--------+-----------+
+| ord_date   | salesman_id | ord_no | purch_amt |
++------------+-------------+--------+-----------+
+| 2012-10-05 |        5002 |  70001 |    150.50 |
+| 2012-09-10 |        5005 |  70009 |    270.65 |
+| 2012-10-05 |        5001 |  70002 |     65.26 |
+| 2012-08-17 |        5003 |  70004 |    110.50 |
+| 2012-09-10 |        5002 |  70007 |    948.50 |
+| 2012-07-27 |        5001 |  70005 |   2400.60 |
+| 2012-09-10 |        5001 |  70008 |   5760.00 |
+| 2012-10-10 |        5006 |  70010 |   1983.43 |
+| 2012-10-10 |        5003 |  70003 |   2480.40 |
+| 2012-06-27 |        5002 |  70012 |    250.45 |
+| 2012-08-17 |        5007 |  70011 |     75.29 |
+| 2012-04-25 |        5001 |  70013 |   3045.60 |
++------------+-------------+--------+-----------+
+12 rows in set (0.00 sec)
+
+5.Write a query which will retrieve the value of salesman id of all salesmen, getting orders from the customers in orders table without any repeats
+
+select distinct salesman_id from orders_table;
++-------------+
+| salesman_id |
++-------------+
+|        5002 |
+|        5005 |
+|        5001 |
+|        5003 |
+|        5006 |
+|        5007 |
++-------------+
+6 rows in set (0.00 sec)
+
+6. Write a SQL statement to display all the information for those customers with a grade of 200
+
+select * from customers_table where grade=200;
++-------------+--------------+------------+-------+-------------+
+| CUSTOMER_ID | CUST_NAME    | CITY       | GRADE | SALESMAN_ID |
++-------------+--------------+------------+-------+-------------+
+|        3005 | GRAHAM ZUSI  | CALIFORNIA |   200 |        5002 |
+|        3007 | BRAD DAVIS   | NEW YORK   |   200 |        5001 |
+|        3003 | JOZY ALTIDOR | MOSCOW     |   200 |        5007 |
++-------------+--------------+------------+-------+-------------+
+3 rows in set (0.06 sec)
+
+7. 1.Write a SQL query to find all the products with a price between Rs.200 and Rs.600
+
+select * from products_table where pro_price between 200 and 600;
++--------+------------------+-----------+---------+
+| PRO_ID | PRO_NAME         | PRO_PRICE | PRO_COM |
++--------+------------------+-----------+---------+
+|    102 | KEY BOARD        |       450 |      16 |
+|    103 | ZIP DRIVE        |       250 |      14 |
+|    104 | SPEAKER          |       550 |      16 |
+|    109 | REFILL CARTRIDGE |       350 |      13 |
+|    110 | MOUSE            |       250 |      12 |
++--------+------------------+-----------+---------+
+5 rows in set (0.06 sec)
+
+Aggregation Function:
+---------------------
+1.Write a SQL statement to find the total purchase amount of all orders.
+
+select sum(purch_amt) from orders_table;
++----------------+
+| sum(purch_amt) |
++----------------+
+|       17541.18 |
++----------------+
+1 row in set (0.30 sec)
+
+2.Write a SQL statement to find the average purchase amount of all orders.
+
+select avg(purch_amt) from orders_table;
++----------------+
+| avg(purch_amt) |
++----------------+
+|    1461.765000 |
++----------------+
+1 row in set (0.00 sec)
+
+3.Write a SQL statement to find the number of salesmen currently listing for all of their customers
+
+ select count(distinct salesman_id) from customers_table;
++-----------------------------+
+| count(distinct salesman_id) |
++-----------------------------+
+|                           6 |
++-----------------------------+
+1 row in set (0.03 sec)
+
+4.Write a SQL statement know how many customer have listed their names
+
+select count(*) from customers_table;
++----------+
+| count(*) |
++----------+
+|        8 |
++----------+
+1 row in set (0.00 sec)
+
+5.Write a SQL statement to get the maximum purchase amount of all the orders
+
+select max(purch_amt) from orders_table;
++----------------+
+| max(purch_amt) |
++----------------+
+|        5760.00 |
++----------------+
+1 row in set (0.00 sec)
+
+Relational Operator:
+---------------------
+1.Write a query to display all customers with a grade above 100
+
+select * from customers_table where grade>100;
++-------------+--------------+------------+-------+-------------+
+| CUSTOMER_ID | CUST_NAME    | CITY       | GRADE | SALESMAN_ID |
++-------------+--------------+------------+-------+-------------+
+|        3005 | GRAHAM ZUSI  | CALIFORNIA |   200 |        5002 |
+|        3004 | FABIAN JOHNS | PARIS      |   300 |        5006 |
+|        3007 | BRAD DAVIS   | NEW YORK   |   200 |        5001 |
+|        3008 | JULIAN GREEN | LONDON     |   300 |        5002 |
+|        3003 | JOZY ALTIDOR | MOSCOW     |   200 |        5007 |
++-------------+--------------+------------+-------+-------------+
+5 rows in set (0.00 sec)
+
+2.Write a query statement to display all customers in New York who have a grade value above 100
+
+ select * from customers_table where city='new york' and grade>100;
++-------------+------------+----------+-------+-------------+
+| CUSTOMER_ID | CUST_NAME  | CITY     | GRADE | SALESMAN_ID |
++-------------+------------+----------+-------+-------------+
+|        3007 | BRAD DAVIS | NEW YORK |   200 |        5001 |
++-------------+------------+----------+-------+-------------+
+1 row in set (0.00 sec)
+
+3.Write a SQL statement to display all customers, who are either belongs to the city New York or had a grade above 100
+
+select * from customers_table where city='new york' or grade>100;
++-------------+--------------+------------+-------+-------------+
+| CUSTOMER_ID | CUST_NAME    | CITY       | GRADE | SALESMAN_ID |
++-------------+--------------+------------+-------+-------------+
+|        3002 | NICK RIMANDO | NEW YORK   |   100 |        5001 |
+|        3005 | GRAHAM ZUSI  | CALIFORNIA |   200 |        5002 |
+|        3004 | FABIAN JOHNS | PARIS      |   300 |        5006 |
+|        3007 | BRAD DAVIS   | NEW YORK   |   200 |        5001 |
+|        3008 | JULIAN GREEN | LONDON     |   300 |        5002 |
+|        3003 | JOZY ALTIDOR | MOSCOW     |   200 |        5007 |
++-------------+--------------+------------+-------+-------------+
+6 rows in set (0.00 sec)
+
+4.Write a SQL statement to display either those orders which are not issued on date 2012-09-10 and 
+issued by the salesman whose ID is 505 and below or those orders which purchase amount is 1000.00 and below.
+
+select * from orders_table where NOT ((ord_date='2012-09-10' AND salesman_id>5005) OR purch_amt>1000.00);
++--------+-----------+------------+-------------+-------------+
+| ord_no | purch_amt | ord_date   | customer_id | salesman_id |
++--------+-----------+------------+-------------+-------------+
+|  70001 |    150.50 | 2012-10-05 | 3005        | 5002        |
+|  70009 |    270.65 | 2012-09-10 | 3001        | 5005        |
+|  70002 |     65.26 | 2012-10-05 | 3002        | 5001        |
+|  70004 |    110.50 | 2012-08-17 | 3009        | 5003        |
+|  70007 |    948.50 | 2012-09-10 | 3005        | 5002        |
+|  70012 |    250.45 | 2012-06-27 | 3008        | 5002        |
+|  70011 |     75.29 | 2012-08-17 | 3003        | 5007        |
++--------+-----------+------------+-------------+-------------+
+7 rows in set (0.03 sec)
+
+SORTING and FILTERING:
+---------------------
+1.Write a query in SQL to display the full name (first and last name),
+and salary for those employees who earn below 6000
+
+select concat(first_name, last_name) as "full name" from employeestable where salary<6000;
++---------------+
+| full name     |
++---------------+
+| NEENANKOCHHAR |
+| DAVIDDAUSTIN  |
+| VALLIVPATABAL |
++---------------+
+3 rows in set (0.00 sec)
+
+
+2.Write a query in SQL to display the first and last name, and
+department number for all employees whose last name is Ernst.
+
+ select first_name,last_name,department_id from employeestable where last_name="Enrst";
+Empty set (0.00 sec)
+
+3.Write a query in SQL to display the full name (first and last), 
+salary, and department number for those employees whose first
+name does not containing the letter M and make the result set in
+ascending order by department number
+
+select concat(first_name,last_name) as "full name",salary,department_id from employeestable where first_name not like '%M' order by department_id;
++------------------+----------+---------------+
+| full name        | salary   | department_id |
++------------------+----------+---------------+
+| ALEXANDERAHUNOLD |  9000.00 |            60 |
+| BRUCEBERNST      |  6000.00 |            60 |
+| DAVIDDAUSTIN     |  4800.00 |            60 |
+| VALLIVPATABAL    |  4200.00 |            60 |
+| STEVENSKING      | 24000.00 |            90 |
+| NEENANKOCHHAR    |  1700.00 |            90 |
+| LEXLDEHAAN       | 17000.00 |            90 |
+| DIANADLORENTZ    | 12008.00 |           110 |
+| SHELLEYSHIGGINS  |  8300.00 |           110 |
++------------------+----------+---------------+
+9 rows in set (0.04 sec)
+
+
+4.Write a query in SQL to display the full name (first and last name),
+and salary for all employees who does not earn any commission
+
+select concat(first_name,last_name),salary from employeestable where commission_pct=0;
++------------------------------+----------+
+| concat(first_name,last_name) | salary   |
++------------------------------+----------+
+| STEVENSKING                  | 24000.00 |
+| NEENANKOCHHAR                |  1700.00 |
+| LEXLDEHAAN                   | 17000.00 |
+| ALEXANDERAHUNOLD             |  9000.00 |
+| BRUCEBERNST                  |  6000.00 |
+| DAVIDDAUSTIN                 |  4800.00 |
+| VALLIVPATABAL                |  4200.00 |
+| DIANADLORENTZ                | 12008.00 |
+| SHELLEYSHIGGINS              |  8300.00 |
+| WILLIAMWGIETZ                |  8300.00 |
++------------------------------+----------+
+10 rows in set (0.00 sec)
+
+Subqueries:
+-----------
+1.Write a query to display all the orders from the orders table issued by the salesman 'Paul Adam'
+
+select * from orders_table where salesman_id=(select salesman_id from salesman_table where name='paul adam');
++--------+-----------+------------+-------------+-------------+
+| ord_no | purch_amt | ord_date   | customer_id | salesman_id |
++--------+-----------+------------+-------------+-------------+
+|  70011 |     75.29 | 2012-08-17 |        3003 |        5007 |
++--------+-----------+------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+2.Write a query to display all the orders for the salesman who belongs to the city London
+
+select * from orders_table where salesman_id=(SELECT salesman_id from salesman_table where city='London');
++--------+-----------+------------+-------------+-------------+
+| ord_no | purch_amt | ord_date   | customer_id | salesman_id |
++--------+-----------+------------+-------------+-------------+
+|  70009 |    270.65 | 2012-09-10 | 3001        | 5005        |
++--------+-----------+------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+3. Write a query to find all the orders issued against the salesman who works for customer whose id is 3007
+
+select * from orders_table where salesman_id=(SELECT DISTINCT SALESMAN_ID FROM ORDERS_TABLE WHERE CUSTOMER_ID=3007);
++--------+-----------+------------+-------------+-------------+
+| ord_no | purch_amt | ord_date   | customer_id | salesman_id |
++--------+-----------+------------+-------------+-------------+
+|  70002 |     65.26 | 2012-10-05 | 3002        | 5001        |
+|  70005 |   2400.60 | 2012-07-27 | 3007        | 5001        |
+|  70008 |   5760.00 | 2012-09-10 | 3002        | 5001        |
+|  70013 |   3045.60 | 2012-04-25 | 3002        | 5001        |
++--------+-----------+------------+-------------+-------------+
+4 rows in set (0.00 sec)
+
+4.Write a query to display the commission of all the salesmen servicing customers in Paris
+
+SELECT COMMISSION FROM SALESMAN_TABLE  WHERE SALESMAN_ID IN (SELECT SALESMAN_ID FROM CUSTOMERS_TABLE WHERE CITY='PARIS');
++------------+
+| COMMISSION |
++------------+
+|       0.14 |
++------------+
+1 row in set (0.06 sec)
+
+
+
+
+
+
