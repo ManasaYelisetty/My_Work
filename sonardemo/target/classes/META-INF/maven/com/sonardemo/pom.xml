@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com</groupId>
+  <artifactId>sonardemo</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+    
+
+<properties>
+<java.version>1.8</java.version>
+<sonar.sources>src/main</sonar.sources>
+<sonar.tests>src/test</sonar.tests>
+<!-- Optional URL to server. Default value is http://localhost:9000 -->
+<sonar.host.url>
+http://localhost:9000
+</sonar.host.url>
+</properties>
+
+
+<build>
+<plugins>
+<plugin>
+<groupId>org.sonarsource.scanner.maven</groupId>
+<artifactId>sonar-maven-plugin</artifactId>
+<version>3.2</version>
+</plugin>
+</plugins>
+</build>
+
+
+
+</project>
