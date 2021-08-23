@@ -1,7 +1,0 @@
-com\dao\RegisterDaoIntf.class
-com\dao\RegisterDaoImpl.class
-com\service\RegisterServiceIntf.class
-com\service\RegisterServiceImpl.class
-com\demo\RegisterController.class
-com\demo\LoginController.class
-com\model\Register.class
